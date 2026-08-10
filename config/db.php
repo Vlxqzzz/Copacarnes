@@ -53,8 +53,10 @@ try {
                 ]);
             } catch (Throwable $e4) {
                 $pdo = null;
-                $db_error_msg = $e4->getMessage();
+                $db_error_msg = "Intento 1 ($db_host:$db_port): " . $e1->getMessage() . " | Intento 2 (mysql.railway.internal): " . $e2->getMessage() . " | Intento 3 (kodama.proxy.rlwy.net): " . $e3->getMessage() . " | Intento 4 (localhost): " . $e4->getMessage();
             }
         }
     }
 }
+
+$GLOBALS['db_error_msg'] = $db_error_msg;

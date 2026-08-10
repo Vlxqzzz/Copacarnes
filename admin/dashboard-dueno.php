@@ -474,6 +474,14 @@ if ($pdo) {
     </div>
 </div>
 
+<?php if ($pdo === null || !empty($GLOBALS['db_error_msg'])): ?>
+<div class="alert alert-error" style="background: rgba(239, 68, 68, 0.25); border: 2px solid #ef4444; color: #fca5a5; padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+    <i class="fa-solid fa-triangle-exclamation"></i> <strong>DIAGNÓSTICO CONEXIÓN DB:</strong> PDO es NULL.<br>
+    <strong>Detalle Error:</strong> <?php echo htmlspecialchars($GLOBALS['db_error_msg'] ?? 'Sin mensaje registrado'); ?><br>
+    <strong>HOST:</strong> <?php echo htmlspecialchars(getenv('DB_HOST') ?: (getenv('MYSQLHOST') ?: 'No definido')); ?> | <strong>DB:</strong> <?php echo htmlspecialchars(getenv('DB_NAME') ?: (getenv('MYSQLDATABASE') ?: 'No definido')); ?>
+</div>
+<?php endif; ?>
+
 <?php echo $status_msg; ?>
 
 <!-- Tarjetas Métricas Reales del ERP -->
