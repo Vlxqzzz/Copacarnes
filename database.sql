@@ -317,7 +317,7 @@ CREATE TABLE `productos` (
   `estado` enum('activo','inactivo') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'activo',
   PRIMARY KEY (`id`),
   UNIQUE KEY `slug` (`slug`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -326,6 +326,7 @@ CREATE TABLE `productos` (
 
 LOCK TABLES `productos` WRITE;
 /*!40000 ALTER TABLE `productos` DISABLE KEYS */;
+INSERT INTO `productos` VALUES (19,'tomahawk-angus','Tomahawk Angus Premium','res','Corte grueso con hueso de alto marmoleo ideal para parrilla.','Tomahawk Ribeye','28 Días en Seco','Angus USA',90000.00,'kg',50.00,'images/tomahawk.jpg','PROMO',1,'2026-08-10 01:07:48',1,15.00,76500.00,'activo'),(20,'picanha-choice','Picanha Choice Importada','res','Tapa de cuadril con capa gruesa de grasa ideal para espadas parrilleras.','Picanha / Tapa de Cuadril','21 Días Húmeda','Nacional Premium',76000.00,'kg',45.00,'images/picanha.jpg','TOP SELLER',1,'2026-08-10 01:07:48',0,0.00,0.00,'activo'),(21,'ribeye-steak','Ribeye Steak Marmoleado','res','Ojo de bife suave y extremadamente jugoso de maduración controlada.','Ribeye Bife','28 Días en Seco','Angus USA',84000.00,'kg',40.00,'images/hero.jpg','OFERTA',1,'2026-08-10 01:07:48',1,12.00,73920.00,'activo'),(22,'costilla-bbq','Costilla BBQA Ahumada','cerdo','Costilla de cerdo tierna marinada en especias finas de la casa.','Costillar de Cerdo','Marinada 48h','San Juan Porcinos',48000.00,'kg',60.00,'images/burger.jpg','PROMO',1,'2026-08-10 01:07:48',1,20.00,38400.00,'activo'),(23,'combo-parrillero','Combo Parrillero Familiar','combos','Incluye Tomahawk, Picanha, Chorizos y Arepas para 5 personas.','Mixto Parrilla','Fresco','Copacarnes',240000.00,'combo',25.00,'images/restaurante.jpg','FAMILIAR',1,'2026-08-10 01:07:48',1,25.00,180000.00,'activo');
 /*!40000 ALTER TABLE `productos` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -385,7 +386,7 @@ CREATE TABLE `proveedores` (
   `fecha_creacion` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `nit_cedula` (`nit_cedula`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -394,6 +395,7 @@ CREATE TABLE `proveedores` (
 
 LOCK TABLES `proveedores` WRITE;
 /*!40000 ALTER TABLE `proveedores` DISABLE KEYS */;
+INSERT INTO `proveedores` VALUES (13,'900.123.456-1','Frigorífico Ganadero del Norte','Carlos Mendoza','+57 312 4567890','contacto@ganaderonorte.com','Ganadería / Res','Calle 100 #45-12','activo','2026-08-09 20:07:48'),(14,'800.987.654-3','Distribuidora Porcina San Juan','Marta Gómez','+57 315 8765432','ventas@sanjuanporcinos.com','Porcicultura / Cerdo','Carrera 50 #12-34','activo','2026-08-09 20:07:48'),(15,'901.333.222-5','Sazonadores & Especias La Casta','Rodrigo Silva','+57 300 1112233','insumos@lacastafoods.com','Insumos & Sazonadores','Avenida El Dorado #68-90','activo','2026-08-09 20:07:48');
 /*!40000 ALTER TABLE `proveedores` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -564,4 +566,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-08-09 19:10:31
+-- Dump completed on 2026-08-09 20:07:56
