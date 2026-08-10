@@ -908,15 +908,15 @@ function openMapModal(sedeType) {
             title: 'Sede Principal - Carnicería & Asadero',
             address: 'Av. Principal Cra. 50 # 48-20, Copacabana, Antioquia',
             phone: '+57 316 3746875',
-            url: 'https://www.google.com/maps/embed?pb=!4v1785702106796!6m8!1m7!1szTlZR7-7W8MtgCafmIOxsQ!2m2!1d6.346999243203424!2d-75.50889410328091!3f288.28398652130113!4f-5.8465765065143955!5f0.7820865974627469',
-            directUrl: 'https://www.google.com/maps/@6.3469992,-75.5088941,3a,75y,288.28h,90t/data=!3m6!1e1!3m4!1szTlZR7-7W8MtgCafmIOxsQ!2e0!7i16384!8i8192'
+            url: 'https://maps.google.com/maps?q=Copacabana%20Antioquia%20Cra.%2050%2048-20&t=&z=16&ie=UTF8&iwloc=&output=embed',
+            directUrl: 'https://maps.google.com/?q=Copacabana+Antioquia+Cra.+50+48-20'
         },
         'secundaria': {
             title: 'Sede Secundaria - Carnicería',
             address: 'Cra. 52 # 50-124, Copacabana, Antioquia',
             phone: '+57 302 2185285',
-            url: 'https://www.google.com/maps/embed?pb=!4v1785702079755!6m8!1m7!1s9JorG4YCBVm7dl5F_Adz_Q!2m2!1d6.346743834875953!2d-75.50937467503473!3f94.1871453660705!4f-6.00295281374342!5f0.7820865974627469',
-            directUrl: 'https://www.google.com/maps/@6.3467438,-75.5093747,3a,75y,94.19h,90t/data=!3m6!1e1!3m4!1s9JorG4YCBVm7dl5F_Adz_Q!2e0!7i16384!8i8192'
+            url: 'https://maps.google.com/maps?q=Copacabana%20Antioquia%20Cra.%2052%2050-124&t=&z=16&ie=UTF8&iwloc=&output=embed',
+            directUrl: 'https://maps.google.com/?q=Copacabana+Antioquia+Cra.+52+50-124'
         }
     };
 
