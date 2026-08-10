@@ -65,9 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_usuario_btn'])
     $eliminar_avatar = intval($_POST['eliminar_avatar'] ?? 0);
     $avatar = trim($_POST['avatar'] ?? '') ?: 'images/avatar-default.png';
 
-    if ($eliminar_avatar === 1 || $avatar === 'images/avatar-default.png' || strpos($avatar, 'avatar-default') !== false) {
-        $avatar = 'images/avatar-default.png';
-    } elseif (isset($_FILES['avatar_file']) && $_FILES['avatar_file']['error'] === UPLOAD_ERR_OK) {
+    // 1. Priorizar subida de archivo de foto de perfil
+    if (isset($_FILES['avatar_file']) && $_FILES['avatar_file']['error'] === UPLOAD_ERR_OK) {
         $file_tmp = $_FILES['avatar_file']['tmp_name'];
         $file_name = $_FILES['avatar_file']['name'];
         $ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
@@ -85,6 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['editar_usuario_btn'])
                 $avatar = 'uploads/avatars/' . $new_filename;
             }
         }
+    } elseif ($eliminar_avatar === 1) {
+        $avatar = 'images/avatar-default.png';
     }
 
     if ($emp_id > 0 && !empty($nombre) && $pdo) {
