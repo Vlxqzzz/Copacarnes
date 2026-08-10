@@ -6,5 +6,5 @@
     "php83Extensions.pdo_mysql",
     "php83Extensions.mbstring"
   ],
-  "startCmd": "php -S 0.0.0.0:$PORT"
+  "startCmd": "php -S 0.0.0.0:$PORT api/index.php"
 }
