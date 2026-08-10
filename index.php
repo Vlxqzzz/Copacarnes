@@ -898,15 +898,21 @@ function openMapModal(sedeType) {
     const iframe = document.getElementById('mapModalIframe');
     const title = document.getElementById('mapModalTitle');
     const externalBtn = document.getElementById('mapModalExternalBtn');
+    const addressSpan = document.getElementById('mapModalAddress');
+    const phoneSpan = document.getElementById('mapModalPhone');
 
     const maps = {
         'principal': {
             title: 'Sede Principal - Carnicería & Asadero',
+            address: 'Av. Principal Cra. 50 # 48-20, Copacabana, Antioquia',
+            phone: '+57 316 3746875',
             url: 'https://www.google.com/maps/embed?pb=!4v1785702106796!6m8!1m7!1szTlZR7-7W8MtgCafmIOxsQ!2m2!1d6.346999243203424!2d-75.50889410328091!3f288.28398652130113!4f-5.8465765065143955!5f0.7820865974627469',
             directUrl: 'https://www.google.com/maps/@6.3469992,-75.5088941,3a,75y,288.28h,90t/data=!3m6!1e1!3m4!1szTlZR7-7W8MtgCafmIOxsQ!2e0!7i16384!8i8192'
         },
         'secundaria': {
             title: 'Sede Secundaria - Carnicería',
+            address: 'Cra. 52 # 50-124, Copacabana, Antioquia',
+            phone: '+57 302 2185285',
             url: 'https://www.google.com/maps/embed?pb=!4v1785702079755!6m8!1m7!1s9JorG4YCBVm7dl5F_Adz_Q!2m2!1d6.346743834875953!2d-75.50937467503473!3f94.1871453660705!4f-6.00295281374342!5f0.7820865974627469',
             directUrl: 'https://www.google.com/maps/@6.3467438,-75.5093747,3a,75y,94.19h,90t/data=!3m6!1e1!3m4!1s9JorG4YCBVm7dl5F_Adz_Q!2e0!7i16384!8i8192'
         }
@@ -914,6 +920,8 @@ function openMapModal(sedeType) {
 
     if (maps[sedeType]) {
         title.innerHTML = '<i class="fa-solid fa-location-dot text-gold"></i> ' + maps[sedeType].title;
+        if (addressSpan) addressSpan.innerText = maps[sedeType].address;
+        if (phoneSpan) phoneSpan.innerText = maps[sedeType].phone;
         iframe.src = maps[sedeType].url;
         externalBtn.href = maps[sedeType].directUrl;
         modal.style.display = 'flex';
@@ -1115,21 +1123,39 @@ document.addEventListener('DOMContentLoaded', function() {
     </div>
 </div>
 
-<div id="mapModal" class="map-modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 20, 0.42) !important; backdrop-filter: blur(2px) !important; -webkit-backdrop-filter: blur(2px) !important; z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem;">
-    <div class="map-modal-content" style="background: #0d1630; border: 1px solid #d4af37; border-radius: 16px; max-width: 880px; width: 100%; overflow: hidden !important; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8); position: relative;">
-        <div style="padding: 1rem 1.2rem; background: rgba(15, 23, 42, 0.98); border-bottom: 1px solid rgba(212, 175, 55, 0.3); display: flex; justify-content: space-between; align-items: center; gap: 1rem; overflow: hidden;">
-            <h3 id="mapModalTitle" style="margin: 0; color: #ffffff; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; flex-shrink: 1;">
+<div id="mapModal" class="map-modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 20, 0.75) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; z-index: 9999; align-items: center; justify-content: center; padding: 1rem;">
+    <div class="map-modal-content" style="background: #0d1630; border: 1px solid #d4af37; border-radius: 16px; max-width: 880px; width: 100%; max-height: 90vh; overflow: hidden !important; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9); position: relative; display: flex; flex-direction: column;">
+        <div style="padding: 1rem 1.2rem; background: rgba(15, 23, 42, 0.98); border-bottom: 1px solid rgba(212, 175, 55, 0.3); display: flex; justify-content: space-between; align-items: center; gap: 1rem;">
+            <h3 id="mapModalTitle" style="margin: 0; color: #ffffff; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
                 <i class="fa-solid fa-location-dot text-gold"></i> Ubicación en Google Maps
             </h3>
-            <div style="display: flex; align-items: center; gap: 0.8rem; flex-shrink: 0;">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
                 <a id="mapModalExternalBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="font-size: 0.8rem; padding: 0.4rem 0.9rem; border-color: #d4af37; color: #d4af37; border-radius: 20px; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver en Google Maps
                 </a>
-                <button type="button" onclick="closeMapModal()" style="background: none !important; border: none !important; color: #ffffff !important; font-size: 1.8rem !important; cursor: pointer !important; line-height: 1 !important; padding: 0 !important; margin: 0 !important; width: 32px !important; height: 32px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important; outline: none !important; overflow: hidden !important; appearance: none !important; -webkit-appearance: none !important;" aria-label="Cerrar">&times;</button>
+                <button type="button" onclick="closeMapModal()" style="background: none !important; border: none !important; color: #ffffff !important; font-size: 1.8rem !important; cursor: pointer !important; line-height: 1 !important; padding: 0 !important; margin: 0 !important; width: 32px !important; height: 32px !important; display: inline-flex !important; align-items: center !important; justify-content: center !important;" aria-label="Cerrar">&times;</button>
             </div>
         </div>
-        <div style="width: 100%; height: 450px; background: #000;">
+        
+        <!-- Vista de Mapa -->
+        <div style="width: 100%; height: 320px; background: #090e1d; position: relative;">
             <iframe id="mapModalIframe" src="" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+
+        <!-- Información Útil de la Sede -->
+        <div style="padding: 1.2rem; background: rgba(9, 14, 29, 0.95); border-top: 1px solid rgba(212, 175, 55, 0.2); display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; color: #e2e8f0; font-size: 0.88rem;">
+            <div>
+                <strong style="color: var(--color-gold); display: block; margin-bottom: 0.2rem;"><i class="fa-solid fa-map-pin"></i> Dirección Exacta:</strong>
+                <span id="mapModalAddress">Cra. 52 # 50-124, Copacabana, Antioquia</span>
+            </div>
+            <div>
+                <strong style="color: var(--color-gold); display: block; margin-bottom: 0.2rem;"><i class="fa-solid fa-phone"></i> Teléfono & WhatsApp:</strong>
+                <span id="mapModalPhone">+57 302 2185285</span>
+            </div>
+            <div>
+                <strong style="color: var(--color-gold); display: block; margin-bottom: 0.2rem;"><i class="fa-solid fa-clock"></i> Horario de Atención:</strong>
+                <span>Lunes a Domingo: 7:00 AM - 9:00 PM</span>
+            </div>
         </div>
     </div>
 </div>
