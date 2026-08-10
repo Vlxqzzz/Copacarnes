@@ -158,3 +158,15 @@ body.auth-body {
     text-decoration: underline !important;
     margin: 0 0.4rem !important;
 }
+
+@media (max-width: 480px) {
+    .auth-fullscreen {
+        padding: 2rem 1rem !important;
+    }
+    .auth-heading h1 {
+        font-size: 1.8rem !important;
+    }
+    .auth-box {
+        max-width: 100% !important;
+    }
+}

@@ -209,7 +209,7 @@ include __DIR__ . '/includes/header.php';
 
 <style>
 .product-detail-section {
-    padding: 7.5rem 1.5rem 5rem 1.5rem;
+    padding: clamp(5.5rem, 8vw, 7.5rem) 1rem 4rem 1rem;
     min-height: 85vh;
 }
 
@@ -249,7 +249,7 @@ include __DIR__ . '/includes/header.php';
 
 .product-detail-media img {
     width: 100%;
-    height: 480px;
+    height: clamp(300px, 40vw, 480px);
     object-fit: cover;
     display: block;
 }
@@ -261,7 +261,7 @@ include __DIR__ . '/includes/header.php';
 }
 
 .product-detail-title {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 3.5vw + 0.5rem, 2.5rem);
     color: #ffffff;
     margin: 0.5rem 0 0 0;
     line-height: 1.2;
@@ -276,10 +276,12 @@ include __DIR__ . '/includes/header.php';
     border-radius: var(--radius-md);
     border-left: 4px solid var(--color-gold);
     width: fit-content;
+    max-width: 100%;
+    flex-wrap: wrap;
 }
 
 .product-detail-price {
-    font-size: 2.2rem;
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
     font-weight: 800;
     color: var(--color-gold);
 }
@@ -308,8 +310,16 @@ include __DIR__ . '/includes/header.php';
         grid-template-columns: 1fr;
         gap: 2rem;
     }
-    .product-detail-media img {
-        height: 350px;
+}
+
+@media (max-width: 480px) {
+    .detail-actions {
+        flex-direction: column;
+    }
+    .detail-actions .btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 48px;
     }
 }
 </style>
