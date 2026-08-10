@@ -337,46 +337,48 @@ include __DIR__ . '/includes/header.php';
                     </a>
                 </div>
 
-                <?php
-                $menu_del_dia_items = [];
-                if ($pdo) {
-                    try {
-                        $stmt_md = $pdo->query("SELECT * FROM menu_del_dia WHERE activo = 1 ORDER BY id ASC");
-                        $menu_del_dia_items = $stmt_md->fetchAll();
-                    } catch (Exception $e) {}
-                }
-                $horario_global = !empty($menu_del_dia_items[0]['horario_atencion']) ? $menu_del_dia_items[0]['horario_atencion'] : '11:30 AM - 3:00 PM';
-                ?>
-                <div class="restaurant-menu-preview" style="background: rgba(15, 23, 42, 0.85); border: 1.5px solid var(--color-gold); border-radius: 16px; padding: 1.8rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <div class="restaurant-menu-preview" onclick="abrirModalCartaRestaurante()" style="background: rgba(15, 23, 42, 0.88); border: 1.5px solid var(--color-gold); border-radius: 16px; padding: 1.8rem; box-shadow: 0 12px 35px rgba(0,0,0,0.6); cursor: pointer; transition: transform 0.2s ease;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; border-bottom: 1px dashed rgba(212, 175, 55, 0.3); padding-bottom: 0.8rem;">
                         <h3 style="margin: 0; color: #ffffff; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
-                            <i class="fa-solid fa-utensils text-gold"></i> Menú del Día (Almuerzo Ejecutivo)
+                            <i class="fa-solid fa-utensils text-gold"></i> Carta del Restaurante & Asadero
                         </h3>
-                        <span class="product-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; font-size: 0.75rem; padding: 0.2rem 0.6rem;">
-                            <i class="fa-solid fa-clock"></i> <?php echo htmlspecialchars($horario_global); ?>
+                        <span class="product-badge" style="background: rgba(212, 175, 55, 0.15); color: var(--color-gold); border: 1px solid var(--color-gold); font-size: 0.75rem; padding: 0.2rem 0.6rem;">
+                            <i class="fa-solid fa-fire"></i> Al Carbón
                         </span>
                     </div>
 
-                    <?php if (empty($menu_del_dia_items)): ?>
-                        <p style="color: var(--color-text-muted); font-size: 0.9rem; text-align: center; margin: 2rem 0;">Consulta el menú del día directamente con nuestras cocineras.</p>
-                    <?php else: ?>
-                        <?php foreach ($menu_del_dia_items as $m_item): ?>
-                        <div class="menu-item-line">
-                            <span class="menu-item-name">
-                                <i class="fa-solid <?php echo htmlspecialchars($m_item['icono'] ?? 'fa-drumstick-bite'); ?> text-gold" style="margin-right: 0.35rem;"></i>
-                                <?php echo htmlspecialchars($m_item['titulo']); ?>
-                            </span>
-                            <span class="menu-item-dots"></span>
-                            <span class="menu-item-price" style="color: var(--color-gold); font-weight: 800;">$<?php echo number_format($m_item['precio'], 0, ',', '.'); ?> COP</span>
-                        </div>
-                        <?php if (!empty($m_item['descripcion'])): ?>
-                            <p class="menu-item-desc"><?php echo htmlspecialchars($m_item['descripcion']); ?></p>
-                        <?php endif; ?>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
+                    <div class="menu-item-line">
+                        <span class="menu-item-name">
+                            <i class="fa-solid fa-drumstick-bite text-gold" style="margin-right: 0.35rem;"></i>
+                            Punta de Anchoa / Baby Beef (400g)
+                        </span>
+                        <span class="menu-item-dots"></span>
+                        <span class="menu-item-price" style="color: var(--color-gold); font-weight: 800;">$48.000 COP</span>
+                    </div>
+                    <p class="menu-item-desc">Corte tierno de res al carbón servido con papa al vapor y ensalada de la casa.</p>
 
-                    <button type="button" onclick="abrirModalCartaRestaurante()" class="btn btn-gold" style="width: 100%; margin-top: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.75rem; font-weight: 800; font-size: 0.9rem;">
-                        <i class="fa-solid fa-book-open"></i> Abrir Carta Completa del Restaurante
+                    <div class="menu-item-line">
+                        <span class="menu-item-name">
+                            <i class="fa-solid fa-fire text-gold" style="margin-right: 0.35rem;"></i>
+                            Churrasco de Res al Carbón (350g)
+                        </span>
+                        <span class="menu-item-dots"></span>
+                        <span class="menu-item-price" style="color: var(--color-gold); font-weight: 800;">$45.000 COP</span>
+                    </div>
+                    <p class="menu-item-desc">Jugoso bife de corte marmoleado marinada con especias parrilleras.</p>
+
+                    <div class="menu-item-line">
+                        <span class="menu-item-name">
+                            <i class="fa-solid fa-bone text-gold" style="margin-right: 0.35rem;"></i>
+                            Costillas BBQ a la Parrilla (500g)
+                        </span>
+                        <span class="menu-item-dots"></span>
+                        <span class="menu-item-price" style="color: var(--color-gold); font-weight: 800;">$42.000 COP</span>
+                    </div>
+                    <p class="menu-item-desc">Costillas de cerdo en salsa artesanal agridulce con papa criolla.</p>
+
+                    <button type="button" onclick="event.stopPropagation(); abrirModalCartaRestaurante();" class="btn btn-gold" style="width: 100%; margin-top: 1.2rem; display: flex; align-items: center; justify-content: center; gap: 0.5rem; padding: 0.85rem; font-weight: 800; font-size: 0.95rem;">
+                        <i class="fa-solid fa-book-open"></i> ABRIR CARTA COMPLETA DEL RESTAURANTE
                     </button>
                 </div>
             </div>
