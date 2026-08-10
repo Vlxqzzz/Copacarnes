@@ -13,8 +13,13 @@ if (isset($required_roles) && is_array($required_roles)) {
     require_auth();
 }
 
-function get_avatar_url($avatar) {
-    if (empty($avatar)) {
+function get_avatar_url($avatar, $nombre = '') {
+    $nombre_lower = strtolower($nombre);
+    if (strpos($nombre_lower, 'andres') !== false) return '../images/Andres.jpeg';
+    if (strpos($nombre_lower, 'viviana') !== false) return '../images/Viviana.jpeg';
+    if (strpos($nombre_lower, 'jorge') !== false && strpos($nombre_lower, 'carnicero') === false) return '../images/Jorge.jpeg';
+
+    if (empty($avatar) || strpos($avatar, 'avatar_19') !== false) {
         return '../images/avatar-default.png';
     }
     if (strpos($avatar, 'http://') === 0 || strpos($avatar, 'https://') === 0) {

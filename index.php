@@ -195,6 +195,28 @@ include __DIR__ . '/includes/header.php';
                 return trim($nom);
             }
         }
+
+        if (!function_exists('obtener_avatar_seguro')) {
+            function obtener_avatar_seguro($avatar, $nombre = '') {
+                $nombre_lower = strtolower($nombre);
+                if (strpos($nombre_lower, 'andres') !== false) return 'images/Andres.jpeg';
+                if (strpos($nombre_lower, 'viviana') !== false) return 'images/Viviana.jpeg';
+                if (strpos($nombre_lower, 'jorge') !== false && strpos($nombre_lower, 'carnicero') === false) return 'images/Jorge.jpeg';
+                if (strpos($nombre_lower, 'darl') !== false) return 'images/Darlison.jpeg';
+                if (strpos($nombre_lower, 'omaira') !== false) return 'images/Omaira.jpeg';
+                if (strpos($nombre_lower, 'mario') !== false) return 'images/Mario.jpeg';
+                if (strpos($nombre_lower, 'luis') !== false) return 'images/Luis.jpeg';
+                if (strpos($nombre_lower, 'elsi') !== false) return 'images/Elsi.jpeg';
+                if (strpos($nombre_lower, 'alejandra') !== false) return 'images/Alejandra.jpeg';
+                if (strpos($nombre_lower, 'natalia') !== false) return 'images/Natalia.jpeg';
+                if (strpos($nombre_lower, 'ximena') !== false) return 'images/Ximena.jpeg';
+
+                if (!empty($avatar) && strpos($avatar, 'avatar_19') === false) {
+                    return $avatar;
+                }
+                return 'images/avatar-default.png';
+            }
+        }
         ?>
 
         <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(212, 175, 55, 0.2);">
@@ -220,7 +242,7 @@ include __DIR__ . '/includes/header.php';
                 <?php foreach ($all_members as $mb): 
                     $nom_clean = formatear_nombre_equipo($mb['nombre']);
                     $rol_clean = formatear_rol_equipo($mb['rol'], $mb['nombre']);
-                    $foto_url = !empty($mb['avatar']) ? $mb['avatar'] : 'images/avatar-default.png';
+                    $foto_url = obtener_avatar_seguro($mb['avatar'] ?? '', $mb['nombre'] ?? '');
                 ?>
                 <div style="background: linear-gradient(135deg, rgba(35, 40, 52, 0.95), rgba(18, 22, 32, 0.95)); border: 2px solid rgba(212, 175, 55, 0.3); border-radius: 18px; padding: 0.8rem 1rem; display: flex; align-items: center; gap: 1.1rem; box-shadow: 4px 6px 18px rgba(0,0,0,0.5); transition: all 0.25s ease;" onmouseover="this.style.borderColor='var(--color-gold)'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px rgba(212,175,55,0.25)';" onmouseout="this.style.borderColor='rgba(212, 175, 55, 0.3)'; this.style.transform='translateY(0)'; this.style.boxShadow='4px 6px 18px rgba(0,0,0,0.5)';">
                     
