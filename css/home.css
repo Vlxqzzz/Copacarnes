@@ -438,32 +438,117 @@
     border: 1px solid var(--color-border);
 }
 
-/* Responsividad Home */
-@media (max-width: 992px) {
+/* Responsividad Home Adaptable (320px - 1920px+) */
+@media (max-width: 1024px) {
     .hero-container {
         grid-template-columns: 1fr;
+        gap: 2.5rem;
         text-align: center;
     }
 
+    .hero-content h1 {
+        font-size: clamp(2.2rem, 5vw + 1rem, 3.5rem);
+    }
+
     .hero-content p {
-        margin: 0 auto 2.5rem auto;
+        margin: 0 auto 2rem auto;
     }
 
     .hero-buttons {
         justify-content: center;
     }
 
-    .about-grid, .restaurant-grid, .contact-grid {
+    .about-grid, .restaurant-grid {
         grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .hero-content h1 {
-        font-size: 2.5rem;
+        gap: 2.5rem;
     }
 
     .restaurant-wrapper {
-        padding: 2rem 1.5rem;
+        padding: 2.5rem 1.5rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        padding: 6.5rem 1rem 3rem 1rem;
+        min-height: auto;
+    }
+
+    .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 1.25rem;
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 1.8rem;
+    }
+
+    .about-features {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .about-img-container img {
+        height: 320px;
+    }
+
+    .about-badge-floating {
+        position: relative;
+        bottom: 0;
+        right: 0;
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .sedes-grid, .products-grid, .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .product-footer {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .product-footer .btn {
+        width: 100%;
+        min-height: 48px;
+    }
+
+    .contact-info-card, .contact-form {
+        padding: 1.5rem 1.2rem;
+    }
+
+    .restaurant-menu-preview {
+        padding: 1.5rem 1rem;
+    }
+
+    .menu-item-line {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+
+    .menu-item-dots {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        min-height: 48px;
     }
 }

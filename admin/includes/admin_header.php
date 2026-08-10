@@ -276,13 +276,16 @@ $page_title_text = $page_title ?? 'Dashboard Administrativo';
     .kpi-value { font-size: 1.8rem; font-weight: 800; color: #ffffff; }
     .kpi-sub { font-size: 0.78rem; color: #10b981; margin-top: 0.4rem; display: flex; align-items: center; gap: 0.3rem; }
 
-    /* Tablas Avanzadas */
+    /* Tablas Avanzadas y Adaptabilidad */
     .data-table-card {
         background: var(--bg-card);
         border: 1px solid var(--border-color);
         border-radius: 14px;
         padding: 1.5rem;
         margin-bottom: 2rem;
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .table-header-tools {
@@ -325,6 +328,7 @@ $page_title_text = $page_title ?? 'Dashboard Administrativo';
         border-collapse: collapse;
         text-align: left;
         font-size: 0.88rem;
+        min-width: 600px;
     }
 
     table.custom-table th {
@@ -333,6 +337,7 @@ $page_title_text = $page_title ?? 'Dashboard Administrativo';
         padding: 0.9rem;
         border-bottom: 1px solid var(--border-color);
         font-weight: 700;
+        white-space: nowrap;
     }
 
     table.custom-table td {
@@ -349,13 +354,136 @@ $page_title_text = $page_title ?? 'Dashboard Administrativo';
         border-radius: 12px;
         font-size: 0.75rem;
         font-weight: 700;
+        white-space: nowrap;
     }
     .status-pill.success { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid #10b981; }
     .status-pill.warning { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid #f59e0b; }
     .status-pill.danger { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border: 1px solid #ef4444; }
+
+    /* Botón Hamburguesa & Overlay Móvil */
+    .sidebar-toggle-btn {
+        display: none;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid var(--border-color);
+        color: #fff;
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        font-size: 1.2rem;
+        cursor: pointer;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+    .sidebar-toggle-btn:hover {
+        background: rgba(212, 175, 55, 0.2);
+        color: var(--gold);
+        border-color: var(--gold);
+    }
+
+    .sidebar-backdrop {
+        display: none;
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        z-index: 998;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .sidebar-backdrop.active {
+        display: block;
+        opacity: 1;
+    }
+
+    /* Media Queries de Adaptabilidad para Admin Dashboards */
+    @media (max-width: 1024px) {
+        .admin-sidebar {
+            left: -280px;
+            box-shadow: 10px 0 30px rgba(0,0,0,0.8);
+        }
+        .admin-sidebar.active {
+            left: 0;
+        }
+        .admin-main {
+            margin-left: 0;
+            width: 100%;
+        }
+        .sidebar-toggle-btn {
+            display: flex;
+        }
+        .admin-topbar {
+            padding: 0 1.2rem;
+        }
+        .dashboard-container {
+            padding: 1.25rem 1rem;
+        }
+    }
+
+    @media (max-width: 767px) {
+        .topbar-right {
+            gap: 0.6rem;
+        }
+        .role-badge {
+            display: none;
+        }
+        .user-profile-btn span {
+            display: none;
+        }
+        .user-profile-btn {
+            padding: 0.3rem;
+            border-radius: 50%;
+        }
+        .kpi-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+        .data-table-card {
+            padding: 1rem 0.8rem;
+            border-radius: 10px;
+        }
+        .table-header-tools {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        .search-input {
+            width: 100% !important;
+        }
+        .export-btns {
+            width: 100%;
+            justify-content: space-between;
+        }
+        .btn-export {
+            flex: 1;
+            justify-content: center;
+        }
+
+        /* Modales Responsivos */
+        #modalDetalleSolicitud > div,
+        #modalDetalleDomicilio > div,
+        #modalNuevaComanda > div,
+        .modal-content-custom {
+            max-height: 90vh !important;
+            overflow-y: auto !important;
+            padding: 1rem !important;
+            margin: 0 0.5rem !important;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .admin-topbar {
+            height: 60px;
+        }
+        .breadcrumbs {
+            font-size: 0.78rem;
+        }
+    }
     </style>
 </head>
 <body>
+
+<div id="sidebarBackdrop" class="sidebar-backdrop"></div>
 
 <!-- Sidebar de Navegación del Sistema (6 Roles del Personal) -->
 <aside class="admin-sidebar">
@@ -404,6 +532,9 @@ $page_title_text = $page_title ?? 'Dashboard Administrativo';
 <div class="admin-main">
     <div class="admin-topbar">
         <div class="topbar-left">
+            <button id="sidebarToggle" type="button" class="sidebar-toggle-btn" title="Abrir Menú de Navegación">
+                <i class="fa-solid fa-bars"></i>
+            </button>
             <div class="breadcrumbs">
                 <a href="#"><i class="fa-solid fa-gauge"></i> Dashboard</a> &rsaquo;
                 <span><?php echo htmlspecialchars($page_title_text); ?></span>
@@ -428,3 +559,23 @@ $page_title_text = $page_title ?? 'Dashboard Administrativo';
     </div>
 
     <div class="dashboard-container">
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('sidebarToggle');
+    const sidebar = document.querySelector('.admin-sidebar');
+    const backdrop = document.getElementById('sidebarBackdrop');
+
+    if (toggleBtn && sidebar && backdrop) {
+        toggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            backdrop.classList.toggle('active');
+        });
+
+        backdrop.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            backdrop.classList.remove('active');
+        });
+    }
+});
+</script>

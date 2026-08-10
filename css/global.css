@@ -41,7 +41,7 @@
 
 html {
     scroll-behavior: smooth;
-    font-size: 16px;
+    font-size: clamp(14px, 1vw + 10px, 16px);
 }
 
 body, button, input, select, textarea {
@@ -50,6 +50,7 @@ body, button, input, select, textarea {
     color: var(--color-text-main);
     line-height: 1.6;
     overflow-x: hidden;
+    max-width: 100vw;
 }
 
 a {
@@ -58,7 +59,7 @@ a {
     transition: var(--transition);
 }
 
-img {
+img, video, iframe, embed, object {
     max-width: 100%;
     height: auto;
     display: block;
@@ -68,7 +69,7 @@ ul {
     list-style: none;
 }
 
-/* Tipografía y Títulos */
+/* Tipografía y Títulos Responsivos */
 h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
     letter-spacing: 1px;
@@ -88,7 +89,7 @@ h1, h2, h3, h4, h5, h6 {
     display: inline-block;
     color: var(--color-gold);
     font-family: var(--font-heading);
-    font-size: 0.95rem;
+    font-size: clamp(0.8rem, 1.2vw, 0.95rem);
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 0.5rem;
@@ -96,7 +97,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-title {
-    font-size: 2.5rem;
+    font-size: clamp(1.8rem, 4vw + 0.5rem, 2.6rem);
     margin-bottom: 1rem;
     position: relative;
     display: inline-block;
@@ -123,14 +124,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .section-subtitle {
     color: var(--color-text-muted);
-    font-size: 1.1rem;
+    font-size: clamp(0.95rem, 1.5vw + 0.3rem, 1.1rem);
     max-width: 700px;
     margin: 0 auto 3rem auto;
 }
 
 /* Layout General */
 .section {
-    padding: 6rem 2rem;
+    padding: clamp(3rem, 6vw + 1rem, 6rem) 1.5rem;
 }
 
 .section-dark {
@@ -138,8 +139,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .container {
+    width: 100%;
     max-width: 1300px;
     margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+/* Helper para Tablas Responsivas */
+.table-responsive {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+    border-radius: var(--radius-sm);
 }
 
 .text-center {
